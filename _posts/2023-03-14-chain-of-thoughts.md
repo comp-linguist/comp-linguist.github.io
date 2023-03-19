@@ -4,7 +4,7 @@ title:  "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models"
 date:   2023-03-14 15:26:24 +0100
 categories: jekyll update
 ---
-In this blog post, we will go over the [NeurIPS 2022 paper titled Chain-of-Thought Prompting Elicits Reasoning in Large Language Models][neurips-paper]. This paper introduces Chain of Thought (CoT) prompting, which augments few-shot training samples for in-context learning with explicit reasoning steps. The authors evaluate the effectiveness of CoT on math word problems, commonsense reasoning and symbolic reasoning and shows performance improvements from the standard prompting as well as fine-tuned GPT-3 with smaller number of parameters. In addition, a 540B parameter language model PaLM prompted with CoT outperforms fine-tuned 175B GPT-3.
+In this blog post, we will go over the [NeurIPS 2022 paper titled Chain-of-Thought Prompting Elicits Reasoning in Large Language Models][neurips-paper]. This paper introduces Chain of Thought (CoT) prompting, which augments few-shot training samples for in-context learning with explicit reasoning steps. The authors evaluate the effectiveness of CoT on math word problems, commonsense reasoning and symbolic reasoning and shows performance improvements from the standard prompting as well as fine-tuned GPT-3 with smaller number of parameters. In addition, a 540B-parameter language model PaLM prompted with CoT outperforms fine-tuned 175B GPT-3.
 
 # Outline of this blog post:
 
@@ -29,7 +29,7 @@ In this blog post, we will go over the [NeurIPS 2022 paper titled Chain-of-Thoug
 
 # 1.1 Motivation behind chain-of-thought prompting <a name="1.1"></a>
 
-Language models have transformed the field of natural language processing by improving performance and sample efficiency. However, increasing the size of models alone does not guarantee high performance on challenging tasks such as arithmetic, commonsense, and symbolic reasoning. This paper proposes a method called "chain-of-thought prompting" which is inspired by several prior directions: prompting, natural language explanations, program synthesis/execution, numeric and logical reasoning, and intermediate language steps. The recent success of large-scale language models has led to growing interest in improving their capability to perform tasks via prompting (Brown et al., 2020)
+Language models have transformed the field of natural language processing by improving performance and sample efficiency. However, increasing the size of models alone does not guarantee high performance on challenging tasks such as arithmetic, commonsense, and symbolic reasoning. This paper proposes a method called "chain-of-thought prompting" which is inspired by several prior directions: prompting, natural language explanations, program synthesis/execution, numeric and logical reasoning, and intermediate language steps. The recent success of large-scale language models has led to growing interest in improving their capability to perform tasks via prompting (Brown et al., 2020).  
 CoT prompting combines two ideas to unlock the reasoning ability of large language models:
 
 **Firstly, generating natural language rationales can improve arithmetic reasoning.**
@@ -38,7 +38,7 @@ Prior work has generated natural language intermediate steps by training from sc
 
 **Secondly, large language models can perform in-context few-shot learning via prompting**, which means that instead of finetuning a separate language model for each new task, one can simply “prompt” the model with a few input–output exemplars demonstrating the task.
 
-Chain-of-thought prompting involves providing a prompt consisting of triples: input, chain of thought, and output. Empirical evaluations on arithmetic, commonsense, and symbolic reasoning benchmarks demonstrate that chain-of-thought prompting outperforms standard prompting. This approach is important because it does not require a large training dataset and a single model checkpoint can perform many tasks without loss of generality.
+Empirical evaluations on arithmetic, commonsense, and symbolic reasoning benchmarks demonstrate that chain-of-thought prompting outperforms standard prompting. This approach is important because it does not require a large training dataset and a single model checkpoint can perform many tasks without loss of generality.
 
 <figure>
     <center><img src="/assets/images/1.png"
@@ -66,12 +66,9 @@ The first method, called "standard prompting" (<a href="https://arxiv.org/abs/20
     <figcaption><font color="grey">Several reasons why CoT is good.<a href="https://neurips.cc/media/PosterPDFs/NeurIPS%202022/54087.png?t=1669146827.101349" target="_blank"> Image Source.</a></font></figcaption></center>
 </figure>
 
-The approach of chain-of-thought prompting has several advantages for enabling reasoning in language models:
-It allows models to break down multi-step problems into intermediate steps, which enables them to allocate additional computation for problems that require more reasoning steps. 
-A chain of thought offers an interpretable view of the model's behavior, indicating how it might have reached a specific answer and allowing for debugging if the reasoning process goes wrong. 
-Chain-of-thought reasoning can be used for a range of tasks like math word problems, commonsense reasoning, and symbolic manipulation, and can potentially be applied to any task that humans solve via language. 
-It can be quickly elicited in large off-the-shelf language models by providing examples of chain of thought sequences as exemplars for few-shot prompting. 
-Empirical experiments that will be discussed below show the effectiveness of chain-of-thought prompting for arithmetic reasoning (Section 2.1<a name="2.1"></a>), commonsense reasoning (Section 2.2<a name="2.2"></a>), and symbolic reasoning (Section 2.3<a name="2.3"></a>).
+The approach of chain-of-thought prompting has several advantages for enabling reasoning in language models:  
+<ul><li>It allows models to break down multi-step problems into intermediate steps, which enables them to allocate additional computation for problems that require more reasoning steps.</li><li>A chain of thought offers an interpretable view of the model's behavior, indicating how it might have reached a specific answer and allowing for debugging if the reasoning process goes wrong.</li><li>Chain-of-thought reasoning can be used for a range of tasks like math word problems, commonsense reasoning, and symbolic manipulation, and can potentially be applied to any task that humans solve via language.</li><li>It can be quickly elicited in large off-the-shelf language models by providing examples of chain of thought sequences as exemplars for few-shot prompting.</li></ul>
+Empirical experiments that will be discussed below show the effectiveness of chain-of-thought prompting for arithmetic reasoning (Section 2.1 <a name="2.1"></a>), commonsense reasoning (Section 2.2 <a name="2.2"></a>), and symbolic reasoning (Section 2.3 <a name="2.3"></a>).
 
 ## 2. Experiments <a name="experiments"></a>
 
